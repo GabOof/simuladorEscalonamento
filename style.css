@@ -1,0 +1,67 @@
+body {
+  font-family: Arial, sans-serif;
+  background-color: #f4f7fa;
+  color: #333;
+  margin: 20px;
+}
+
+h1 {
+  text-align: center;
+  color: #2b4c7e;
+}
+
+section {
+  background: #fff;
+  padding: 20px;
+  margin: 20px auto;
+  border-radius: 12px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  width: 80%;
+}
+
+input,
+select,
+button {
+  margin: 5px;
+  padding: 6px;
+  border-radius: 6px;
+  border: 1px solid #ccc;
+}
+
+button {
+  background-color: #2b4c7e;
+  color: #fff;
+  cursor: pointer;
+  border: none;
+}
+
+button:hover {
+  background-color: #355d99;
+}
+
+#tabelaPacientes {
+  width: 100%;
+  border-collapse: collapse;
+  margin-top: 10px;
+}
+
+#tabelaPacientes th,
+#tabelaPacientes td {
+  border: 1px solid #ddd;
+  padding: 8px;
+  text-align: center;
+}
+
+#gantt {
+  margin-top: 20px;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 5px;
+}
+
+.barra {
+  background-color: #2b4c7e;
+  color: white;
+  padding: 8px;
+  border-radius: 6px;
+}
