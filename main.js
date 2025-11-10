@@ -28,3 +28,17 @@ function atualizarTabela() {
     tbody.innerHTML += linha;
   });
 }
+
+document.getElementById("simular").addEventListener("click", () => {
+  const algoritmo = document.getElementById("algoritmo").value;
+  const medicos = parseInt(document.getElementById("medicos").value);
+
+  if (pacientes.length === 0) {
+    alert("Adicione ao menos um paciente!");
+    return;
+  }
+
+  if (algoritmo === "sjf") {
+    simularSJF([...pacientes], medicos);
+  }
+});
