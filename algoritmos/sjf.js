@@ -4,6 +4,7 @@ function simularSJF(pacientes, medicos) {
   gantt.innerHTML = "";
   metricas.innerHTML = "";
 
+  // Ordena por tempo de chegada
   pacientes.sort((a, b) => a.chegada - b.chegada);
 
   let tempoAtual = 0;
@@ -27,33 +28,33 @@ function simularSJF(pacientes, medicos) {
 
     const inicio = tempoAtual;
     const fim = inicio + atual.duracao;
-    const espera = inicio - atual.chegada;
+    const tempoEspera = inicio - atual.chegada;
     const turnaround = fim - atual.chegada;
 
-    totalEspera += espera;
+    totalEspera += tempoEspera;
     totalTurnaround += turnaround;
     tempoAtual = fim;
 
     ordemExecucao.push({ nome: atual.nome, inicio, fim });
   }
 
-  console.log("Execução SJF concluída:", ordemExecucao);
+  ordemExecucao.forEach((p) => {
+    const barra = document.createElement("div");
+    barra.classList.add("barra");
+    barra.textContent = `${p.nome} (${p.inicio}-${p.fim})`;
+    gantt.appendChild(barra);
+  });
+
+  const n = ordemExecucao.length;
+  const tempoMedioEspera = (totalEspera / n).toFixed(2);
+  const tempoMedioTurnaround = (totalTurnaround / n).toFixed(2);
+
+  metricas.innerHTML = `
+        <p><b>Tempo Médio de Espera:</b> ${tempoMedioEspera}</p>
+        <p><b>Tempo Médio de Execução (Turnaround):</b> ${tempoMedioTurnaround}</p>
+        <p><b>Total de Trocas de Contexto:</b> ${n - 1}</p>
+        <p><b>Utilização Média dos Médicos:</b> ${(100).toFixed(2)}%</p>
+    `;
+
+  console.log("SJF Finalizado", ordemExecucao);
 }
-
-ordemExecucao.forEach((p) => {
-  const barra = document.createElement("div");
-  barra.classList.add("barra");
-  barra.textContent = `${p.nome} (${p.inicio}-${p.fim})`;
-  gantt.appendChild(barra);
-});
-
-const n = ordemExecucao.length;
-const tempoMedioEspera = (totalEspera / n).toFixed(2);
-const tempoMedioTurnaround = (totalTurnaround / n).toFixed(2);
-
-metricas.innerHTML = `
-    <p><b>Tempo Médio de Espera:</b> ${tempoMedioEspera}</p>
-    <p><b>Tempo Médio de Execução (Turnaround):</b> ${tempoMedioTurnaround}</p>
-    <p><b>Total de Trocas de Contexto:</b> ${n - 1}</p>
-    <p><b>Utilização Média dos Médicos:</b> ${(100).toFixed(2)}%</p>
-  `;
