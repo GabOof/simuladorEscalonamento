@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Simulador de Escalonamento</title>
+    <link rel="stylesheet" href="style.css" />
+  </head>
+  <body>
+    <h1>🏥 Hospital Digital</h1>
+
+    <section class="config">
+      <label for="algoritmo">Algoritmo:</label>
+      <select id="algoritmo">
+        <option value="sjf" selected>Shortest Job First (SJF)</option>
+      </select>
+
+      <label for="medicos">Número de Médicos:</label>
+      <select id="medicos">
+        <option value="1">1</option>
+        <option value="2">2</option>
+        <option value="4">4</option>
+      </select>
+
+      <h3>Adicionar Pacientes</h3>
+      <input type="text" id="nome" placeholder="Nome" />
+      <input type="number" id="chegada" placeholder="Chegada" />
+      <input type="number" id="duracao" placeholder="Duração do Atendimento" />
+      <input
+        type="number"
+        id="prioridade"
+        placeholder="Prioridade (1 = Alta)"
+      />
+      <button id="addPaciente">Adicionar</button>
+
+      <table id="tabelaPacientes">
+        <thead>
+          <tr>
+            <th>Nome</th>
+            <th>Chegada</th>
+            <th>Duração</th>
+            <th>Prioridade</th>
+          </tr>
+        </thead>
+        <tbody></tbody>
+      </table>
+
+      <button id="simular">Simular</button>
+    </section>
+
+    <section class="resultado">
+      <h2>Resultado</h2>
+      <div id="gantt"></div>
+      <div id="metricas"></div>
+    </section>
+
+    <script src="main.js"></script>
+  </body>
+</html>
