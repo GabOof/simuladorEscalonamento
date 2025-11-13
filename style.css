@@ -52,16 +52,70 @@ button:hover {
   text-align: center;
 }
 
-#gantt {
-  margin-top: 20px;
+.gantt-container {
+  background: #fff;
+  border-radius: 12px;
+  padding: 10px;
+  box-shadow: 0 0 6px rgba(0, 0, 0, 0.15);
   display: flex;
-  flex-wrap: wrap;
-  gap: 5px;
+  justify-content: center;
+  align-items: center;
+  overflow-x: auto;
+  margin-top: 20px;
 }
 
-.barra {
-  background-color: #2b4c7e;
-  color: white;
-  padding: 8px;
+#ganttCanvas {
+  border: 1px solid #ccc;
+  background-color: #fafafa;
   border-radius: 6px;
+}
+
+.legenda {
+  margin-top: 10px;
+}
+
+/* Estilo da legenda e cores dos médicos */
+.legenda {
+  background-color: #fff;
+  width: 80%;
+  margin: 10px auto;
+  padding: 10px;
+  border-radius: 8px;
+  box-shadow: 0 0 6px rgba(0, 0, 0, 0.1);
+}
+
+.cores {
+  display: flex;
+  gap: 10px;
+}
+
+.cor {
+  padding: 5px 10px;
+  border-radius: 6px;
+  color: white;
+}
+
+.medico1 {
+  background-color: #2b4c7e;
+}
+.medico2 {
+  background-color: #4c7e2b;
+}
+.medico3 {
+  background-color: #7e2b4c;
+}
+.medico4 {
+  background-color: #c47e1c;
+}
+
+/* Área de logs */
+.logs {
+  background: #f9f9f9;
+  padding: 10px;
+  border-radius: 8px;
+  margin-top: 15px;
+  max-height: 250px;
+  overflow-y: auto;
+  font-family: monospace;
+  border: 1px solid #ccc;
 }
