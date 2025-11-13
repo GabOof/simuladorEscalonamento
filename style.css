@@ -77,7 +77,7 @@ button:hover {
   margin-top: 20px;
 }
 
-#ganttCanvas {
+#canvasGantt {
   border: 1px solid #ccc;
   background-color: #fafafa;
   border-radius: 6px;
