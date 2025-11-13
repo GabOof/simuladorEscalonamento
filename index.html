@@ -45,8 +45,20 @@
     </section>
     <section class="resultado">
       <h2>Resultado</h2>
-      <div id="gantt"></div>
+      <div class="legenda">
+        <p><b>Legenda Médicos:</b></p>
+        <div class="cores">
+          <span class="cor medico1">Médico 1</span>
+          <span class="cor medico2">Médico 2</span>
+          <span class="cor medico3">Médico 3</span>
+          <span class="cor medico4">Médico 4</span>
+        </div>
+      </div>
+      <div id="gantt" class="gantt-container">
+        <canvas id="ganttCanvas" width="900" height="400"></canvas>
+      </div>
       <div id="metricas"></div>
+      <div id="eventos" class="logs"></div>
     </section>
     <script src="main.js"></script>
     <script src="algoritmos/sjf.js"></script>
