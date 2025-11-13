@@ -1,3 +1,6 @@
+/* ============================================================
+   ESTILOS GERAIS DA APLICAÇÃO
+============================================================ */
 body {
   font-family: Arial, sans-serif;
   background-color: #f4f7fa;
@@ -5,11 +8,13 @@ body {
   margin: 20px;
 }
 
+/* Título principal */
 h1 {
   text-align: center;
   color: #2b4c7e;
 }
 
+/* Estrutura base das seções */
 section {
   background: #fff;
   padding: 20px;
@@ -19,6 +24,7 @@ section {
   width: 80%;
 }
 
+/* Campos de entrada e botões */
 input,
 select,
 button {
@@ -28,6 +34,7 @@ button {
   border: 1px solid #ccc;
 }
 
+/* Botões principais */
 button {
   background-color: #2b4c7e;
   color: #fff;
@@ -39,6 +46,9 @@ button:hover {
   background-color: #355d99;
 }
 
+/* ============================================================
+   TABELA DE PACIENTES
+============================================================ */
 #tabelaPacientes {
   width: 100%;
   border-collapse: collapse;
@@ -52,6 +62,9 @@ button:hover {
   text-align: center;
 }
 
+/* ============================================================
+   GRÁFICO DE GANTT
+============================================================ */
 .gantt-container {
   background: #fff;
   border-radius: 12px;
@@ -70,11 +83,9 @@ button:hover {
   border-radius: 6px;
 }
 
-.legenda {
-  margin-top: 10px;
-}
-
-/* Estilo da legenda e cores dos médicos */
+/* ============================================================
+   LEGENDA DE CORES DOS MÉDICOS
+============================================================ */
 .legenda {
   background-color: #fff;
   width: 80%;
@@ -95,6 +106,7 @@ button:hover {
   color: white;
 }
 
+/* Cores individuais de cada médico */
 .medico1 {
   background-color: #2b4c7e;
 }
@@ -108,7 +120,9 @@ button:hover {
   background-color: #c47e1c;
 }
 
-/* Área de logs */
+/* ============================================================
+   ÁREA DE LOGS
+============================================================ */
 .logs {
   background: #f9f9f9;
   padding: 10px;
