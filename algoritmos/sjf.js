@@ -28,7 +28,7 @@ function executarSJF(listaPacientes, qtdMedicos) {
 
   registrarEvento(
     painelEventos,
-    `<i class="fa fa-play"></i> Início da simulação SJF com ${qtdMedicos} médico(s).`
+    `<i class="fa fa-play" style="color: #23501bff"></i> Início da simulação SJF com ${qtdMedicos} médico(s).`
   );
 
   // ===============================================================
@@ -48,7 +48,7 @@ function executarSJF(listaPacientes, qtdMedicos) {
       filaDeEspera.push(novoPaciente);
       registrarEvento(
         painelEventos,
-        `<i class="fa fa-user-plus"></i> ${novoPaciente.nome} chegou no tempo ${novoPaciente.chegada}.`
+        `<i class="fa fa-user-plus" style="color: #23501bff"></i> ${novoPaciente.nome} chegou no tempo ${novoPaciente.chegada}.`
       );
     }
 
@@ -84,7 +84,7 @@ function executarSJF(listaPacientes, qtdMedicos) {
 
         registrarEvento(
           painelEventos,
-          ` <i class="fa fa-user-doctor"></i> ${
+          ` <i class="fa fa-user-doctor" style="color: #23501bff"></i> ${
             pacienteAtual.nome
           } iniciou com Médico ${
             i + 1
@@ -110,17 +110,17 @@ function executarSJF(listaPacientes, qtdMedicos) {
 
   // --- Exibe as métricas na interface ---
   painelMetricas.innerHTML = `
-    <p><b><i class="fa fa-hourglass-start"></i> Tempo Médio de Espera:</b> ${mediaEspera}</p>
-    <p><b><i class="fa fa-clock"></i> Tempo Médio de Execução (Turnaround):</b> ${mediaTurnaround}</p>
-    <p><b><i class="fa fa-exchange-alt"></i> Total de Trocas de Contexto:</b> ${
+    <p><b><i class="fa fa-hourglass-start" style="color: #23501bff"></i> Tempo Médio de Espera:</b> ${mediaEspera}</p>
+    <p><b><i class="fa fa-clock" style="color: #23501bff"></i> Tempo Médio de Execução (Turnaround):</b> ${mediaTurnaround}</p>
+    <p><b><i class="fa fa-exchange-alt" style="color: #23501bff"></i> Total de Trocas de Contexto:</b> ${
       totalPacientes - qtdMedicos
     }</p>
-    <p><b><i class="fa fa-user-md"></i> Utilização Média dos Médicos:</b> ${taxaUtilizacao}%</p>
+    <p><b><i class="fa fa-user-md" style="color: #23501bff"></i> Utilização Média dos Médicos:</b> ${taxaUtilizacao}%</p>
   `;
 
   registrarEvento(
     painelEventos,
-    `<i class="fa fa-check"></i> Simulação finalizada no tempo ${tempoCorrente}.`
+    `<i class="fa fa-check" style="color: #23501bff"></i> Simulação finalizada no tempo ${tempoCorrente}.`
   );
 }
 

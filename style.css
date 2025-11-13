@@ -3,7 +3,7 @@
 ============================================================ */
 body {
   font-family: Arial, sans-serif;
-  background-color: #f4f7fa;
+  background-color: #cbffb8ff;
   color: #333;
   margin: 20px;
 }
@@ -11,7 +11,7 @@ body {
 /* Título principal */
 h1 {
   text-align: center;
-  color: #2b4c7e;
+  color: #23501bff;
 }
 
 /* Estrutura base das seções */
@@ -36,14 +36,14 @@ button {
 
 /* Botões principais */
 button {
-  background-color: #2b4c7e;
+  background-color: #23501bff;
   color: #fff;
   cursor: pointer;
   border: none;
 }
 
 button:hover {
-  background-color: #355d99;
+  background-color: #23501bff;
 }
 
 /* ============================================================
