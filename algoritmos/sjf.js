@@ -28,7 +28,7 @@ function executarSJF(listaPacientes, qtdMedicos) {
 
   registrarEvento(
     painelEventos,
-    `🟢 Início da simulação SJF com ${qtdMedicos} médico(s).`
+    `<i class="fa fa-play"></i> Início da simulação SJF com ${qtdMedicos} médico(s).`
   );
 
   // ===============================================================
@@ -48,7 +48,7 @@ function executarSJF(listaPacientes, qtdMedicos) {
       filaDeEspera.push(novoPaciente);
       registrarEvento(
         painelEventos,
-        `🩺 ${novoPaciente.nome} chegou no tempo ${novoPaciente.chegada}.`
+        `<i class="fa fa-user-plus"></i> ${novoPaciente.nome} chegou no tempo ${novoPaciente.chegada}.`
       );
     }
 
@@ -84,7 +84,9 @@ function executarSJF(listaPacientes, qtdMedicos) {
 
         registrarEvento(
           painelEventos,
-          `👨‍⚕️ ${pacienteAtual.nome} iniciou com Médico ${
+          ` <i class="fa fa-user-doctor"></i> ${
+            pacienteAtual.nome
+          } iniciou com Médico ${
             i + 1
           } (${inicioAtendimento} → ${fimAtendimento}).`
         );
@@ -108,15 +110,17 @@ function executarSJF(listaPacientes, qtdMedicos) {
 
   // --- Exibe as métricas na interface ---
   painelMetricas.innerHTML = `
-    <p><b>Tempo Médio de Espera:</b> ${mediaEspera}</p>
-    <p><b>Tempo Médio de Execução (Turnaround):</b> ${mediaTurnaround}</p>
-    <p><b>Total de Trocas de Contexto:</b> ${totalPacientes - qtdMedicos}</p>
-    <p><b>Utilização Média dos Médicos:</b> ${taxaUtilizacao}%</p>
+    <p><b><i class="fa fa-hourglass-start"></i> Tempo Médio de Espera:</b> ${mediaEspera}</p>
+    <p><b><i class="fa fa-clock"></i> Tempo Médio de Execução (Turnaround):</b> ${mediaTurnaround}</p>
+    <p><b><i class="fa fa-exchange-alt"></i> Total de Trocas de Contexto:</b> ${
+      totalPacientes - qtdMedicos
+    }</p>
+    <p><b><i class="fa fa-user-md"></i> Utilização Média dos Médicos:</b> ${taxaUtilizacao}%</p>
   `;
 
   registrarEvento(
     painelEventos,
-    `✅ Simulação finalizada no tempo ${tempoCorrente}.`
+    `<i class="fa fa-check"></i> Simulação finalizada no tempo ${tempoCorrente}.`
   );
 }
 
@@ -190,7 +194,7 @@ function desenharGantt(context, execucoes) {
   // --- Título ---
   context.fillStyle = "#000";
   context.font = "bold 13px Arial";
-  context.fillText("Pacientes (base = primeiros atendidos)", 5, 20);
+  context.fillText("Pacientes", 5, 20);
 }
 
 // ===================================================================
@@ -198,7 +202,7 @@ function desenharGantt(context, execucoes) {
 // ===================================================================
 function registrarEvento(container, mensagem) {
   const paragrafo = document.createElement("p");
-  paragrafo.textContent = mensagem;
+  paragrafo.innerHTML = mensagem;
   container.appendChild(paragrafo);
   container.scrollTop = container.scrollHeight;
 }
