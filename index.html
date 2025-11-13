@@ -6,10 +6,16 @@
     <title>Simulador de Escalonamento</title>
     <!-- Estilos gerais -->
     <link rel="stylesheet" href="style.css" />
+
+    <!-- Ícones FontAwesome -->
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.0.1/css/all.min.css"
+    />
   </head>
 
   <body>
-    <h1>🏥 Hospital Digital</h1>
+    <h1><i class="fa fa-hospital"></i> Hospital Digital</h1>
 
     <!-- ==============================
          SEÇÃO DE CONFIGURAÇÃO
@@ -17,7 +23,7 @@
     =============================== -->
     <section class="config">
       <!-- Escolha do algoritmo -->
-      <label for="algoritmo">Algoritmo:</label>
+      <label for="algoritmo"><i class="fa fa-code"></i> Algoritmo:</label>
       <select id="algoritmo">
         <option value="sjf" selected>Shortest Job First (SJF)</option>
 
@@ -27,14 +33,16 @@
       </select>
 
       <!-- Quantidade de médicos (recursos do sistema) -->
-      <label for="medicos">Número de Médicos:</label>
+      <label for="medicos"
+        ><i class="fa-solid fa-user-doctor"></i> Número de Médicos:</label
+      >
       <select id="medicos">
         <option value="1">1</option>
         <option value="2">2</option>
         <option value="4">4</option>
       </select>
 
-      <h3>Adicionar Pacientes</h3>
+      <h3><i class="fa fa-user-plus"></i> Adicionar Pacientes</h3>
       <!-- Entradas de dados do paciente -->
       <input type="text" id="nome" placeholder="Nome" />
       <input type="number" id="chegada" placeholder="Chegada" />
@@ -44,23 +52,23 @@
         id="prioridade"
         placeholder="Prioridade (1 = Alta)"
       />
-      <button id="addPaciente">Adicionar</button>
+      <button id="addPaciente"><i class="fa fa-check"></i> Adicionar</button>
 
       <!-- Tabela dinâmica de pacientes -->
       <table id="tabelaPacientes">
         <thead>
           <tr>
-            <th>Nome</th>
-            <th>Chegada</th>
-            <th>Duração do Atendimento</th>
-            <th>Prioridade</th>
+            <th><i class="fa fa-id-badge"></i> Nome</th>
+            <th><i class="fa fa-clock"></i> Chegada</th>
+            <th><i class="fa fa-hourglass-half"></i> Duração do Atendimento</th>
+            <th><i class="fa fa-flag"></i> Prioridade</th>
           </tr>
         </thead>
         <tbody></tbody>
       </table>
 
       <!-- Botão principal da simulação -->
-      <button id="simular">Simular</button>
+      <button id="simular"><i class="fa fa-play"></i> Simular</button>
     </section>
 
     <!-- ==============================
@@ -68,16 +76,24 @@
          Exibe o gráfico, métricas e eventos
     =============================== -->
     <section class="resultado">
-      <h2>Resultado</h2>
+      <h2><i class="fa fa-chart-bar"></i> Resultado</h2>
 
       <!-- Legenda para identificar as cores de cada médico -->
       <div class="legenda">
         <p><b>Legenda Médicos:</b></p>
         <div class="cores">
-          <span class="cor medico1">Médico 1</span>
-          <span class="cor medico2">Médico 2</span>
-          <span class="cor medico3">Médico 3</span>
-          <span class="cor medico4">Médico 4</span>
+          <span class="cor medico1"
+            ><i class="fa fa-user-doctor"></i> Médico 1</span
+          >
+          <span class="cor medico2"
+            ><i class="fa fa-user-doctor"></i> Médico 2</span
+          >
+          <span class="cor medico3"
+            ><i class="fa fa-user-doctor"></i> Médico 3</span
+          >
+          <span class="cor medico4"
+            ><i class="fa fa-user-doctor"></i> Médico 4</span
+          >
         </div>
       </div>
 
