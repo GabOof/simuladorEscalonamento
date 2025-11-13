@@ -3,190 +3,202 @@
   Desenvolvido por: Gabrielle de Oliveira Fonseca
 */
 
-function simularSJF(pacientes, medicos) {
-  const ganttCanvas = document.getElementById("ganttCanvas");
-  const metricas = document.getElementById("metricas");
-  const eventos = document.getElementById("eventos");
+function executarSJF(listaPacientes, qtdMedicos) {
+  const canvasGantt = document.getElementById("canvasGantt");
+  const painelMetricas = document.getElementById("painelMetricas");
+  const painelEventos = document.getElementById("painelEventos");
 
   // --- Prepara o canvas e as áreas de saída ---
-  const ctx = ganttCanvas.getContext("2d");
-  ctx.clearRect(0, 0, ganttCanvas.width, ganttCanvas.height);
-  metricas.innerHTML = "";
-  eventos.innerHTML = "";
+  const context = canvasGantt.getContext("2d");
+  context.clearRect(0, 0, canvasGantt.width, canvasGantt.height);
+  painelMetricas.innerHTML = "";
+  painelEventos.innerHTML = "";
 
   // --- Ordena cronologicamente os pacientes ---
-  pacientes.sort((a, b) => a.chegada - b.chegada);
+  listaPacientes.sort((a, b) => a.chegada - b.chegada);
 
   // --- Inicializa as variáveis ---
-  let tempoAtual = 0;
-  let filaProntos = [];
-  let medicosLivres = Array(medicos).fill(0);
-  let ordemExecucao = [];
-  let totalEspera = 0;
-  let totalTurnaround = 0;
-  let totalOcupacao = 0;
+  let tempoCorrente = 0;
+  let filaDeEspera = [];
+  let disponibilidadeMedicos = Array(qtdMedicos).fill(0);
+  let historicoExecucao = [];
+  let somaEspera = 0;
+  let somaTurnaround = 0;
+  let somaOcupacao = 0;
 
   registrarEvento(
-    eventos,
-    `🟢 Início da simulação SJF com ${medicos} médico(s).`
+    painelEventos,
+    `🟢 Início da simulação SJF com ${qtdMedicos} médico(s).`
   );
 
   // ===============================================================
-  // LOOP PRINCIPAL DE SIMULAÇÃO
+  // LOOP PRINCIPAL DA SIMULAÇÃO
   // ===============================================================
   while (
-    pacientes.length > 0 ||
-    filaProntos.length > 0 ||
-    medicosLivres.some((t) => t > tempoAtual)
+    listaPacientes.length > 0 ||
+    filaDeEspera.length > 0 ||
+    disponibilidadeMedicos.some((t) => t > tempoCorrente)
   ) {
     // --- Chegada de novos pacientes ---
-    while (pacientes.length > 0 && pacientes[0].chegada <= tempoAtual) {
-      const novo = pacientes.shift();
-      filaProntos.push(novo);
+    while (
+      listaPacientes.length > 0 &&
+      listaPacientes[0].chegada <= tempoCorrente
+    ) {
+      const novoPaciente = listaPacientes.shift();
+      filaDeEspera.push(novoPaciente);
       registrarEvento(
-        eventos,
-        `🩺 ${novo.nome} chegou no tempo ${novo.chegada}.`
+        painelEventos,
+        `🩺 ${novoPaciente.nome} chegou no tempo ${novoPaciente.chegada}.`
       );
     }
 
-    // --- Ordena a fila de prontos pelo menor tempo de serviço (SJF) ---
-    filaProntos.sort((a, b) => a.duracao - b.duracao);
+    // --- Ordena a fila pelo menor tempo de atendimento (SJF) ---
+    filaDeEspera.sort((a, b) => a.duracao - b.duracao);
 
-    // --- Aloca os médicos disponíveis ---
-    for (let i = 0; i < medicos; i++) {
-      if (medicosLivres[i] <= tempoAtual && filaProntos.length > 0) {
-        const atual = filaProntos.shift();
-        const inicio = tempoAtual;
-        const fim = inicio + atual.duracao;
-        const tempoEspera = inicio - atual.chegada;
-        const turnaround = fim - atual.chegada;
+    // --- Aloca médicos disponíveis ---
+    for (let i = 0; i < qtdMedicos; i++) {
+      if (
+        disponibilidadeMedicos[i] <= tempoCorrente &&
+        filaDeEspera.length > 0
+      ) {
+        const pacienteAtual = filaDeEspera.shift();
+        const inicioAtendimento = tempoCorrente;
+        const fimAtendimento = inicioAtendimento + pacienteAtual.duracao;
+        const tempoDeEspera = inicioAtendimento - pacienteAtual.chegada;
+        const tempoTotal = fimAtendimento - pacienteAtual.chegada;
 
-        // --- Atualiza as métricas globais ---
-        totalEspera += tempoEspera;
-        totalTurnaround += turnaround;
-        totalOcupacao += atual.duracao;
-        medicosLivres[i] = fim;
+        // --- Atualiza métricas acumuladas ---
+        somaEspera += tempoDeEspera;
+        somaTurnaround += tempoTotal;
+        somaOcupacao += pacienteAtual.duracao;
+        disponibilidadeMedicos[i] = fimAtendimento;
 
-        // --- Registra a execução para o gráfico ---
-        ordemExecucao.push({
-          nome: atual.nome,
-          chegada: atual.chegada,
-          inicio,
-          fim,
+        // --- Registra dados para o gráfico ---
+        historicoExecucao.push({
+          nome: pacienteAtual.nome,
+          chegada: pacienteAtual.chegada,
+          inicio: inicioAtendimento,
+          fim: fimAtendimento,
           medico: i + 1,
         });
 
         registrarEvento(
-          eventos,
-          `👨‍⚕️ ${atual.nome} iniciou com Médico ${i + 1} (${inicio} → ${fim}).`
+          painelEventos,
+          `👨‍⚕️ ${pacienteAtual.nome} iniciou com Médico ${
+            i + 1
+          } (${inicioAtendimento} → ${fimAtendimento}).`
         );
       }
     }
 
-    tempoAtual++;
+    tempoCorrente++;
   }
 
   // --- Gera o gráfico de Gantt ---
-  desenharGanttInvertido(ctx, ordemExecucao);
+  desenharGantt(context, historicoExecucao);
 
-  // --- Cálcula as métricas de desempenho ---
-  const n = ordemExecucao.length;
-  const tempoMedioEspera = (totalEspera / n).toFixed(2);
-  const tempoMedioTurnaround = (totalTurnaround / n).toFixed(2);
-  const utilizacao = ((totalOcupacao / (tempoAtual * medicos)) * 100).toFixed(
-    2
-  );
+  // --- Calcula métricas médias ---
+  const totalPacientes = historicoExecucao.length;
+  const mediaEspera = (somaEspera / totalPacientes).toFixed(2);
+  const mediaTurnaround = (somaTurnaround / totalPacientes).toFixed(2);
+  const taxaUtilizacao = (
+    (somaOcupacao / (tempoCorrente * qtdMedicos)) *
+    100
+  ).toFixed(2);
 
   // --- Exibe as métricas na interface ---
-  metricas.innerHTML = `
-    <p><b>Tempo Médio de Espera:</b> ${tempoMedioEspera}</p>
-    <p><b>Tempo Médio de Execução (Turnaround):</b> ${tempoMedioTurnaround}</p>
-    <p><b>Total de Trocas de Contexto:</b> ${n - medicos}</p>
-    <p><b>Utilização Média dos Médicos:</b> ${utilizacao}%</p>
+  painelMetricas.innerHTML = `
+    <p><b>Tempo Médio de Espera:</b> ${mediaEspera}</p>
+    <p><b>Tempo Médio de Execução (Turnaround):</b> ${mediaTurnaround}</p>
+    <p><b>Total de Trocas de Contexto:</b> ${totalPacientes - qtdMedicos}</p>
+    <p><b>Utilização Média dos Médicos:</b> ${taxaUtilizacao}%</p>
   `;
 
-  registrarEvento(eventos, `✅ Simulação finalizada no tempo ${tempoAtual}.`);
+  registrarEvento(
+    painelEventos,
+    `✅ Simulação finalizada no tempo ${tempoCorrente}.`
+  );
 }
 
 // ===================================================================
 // FUNÇÃO DE DESENHO DO GRÁFICO DE GANTT
 // ===================================================================
-function desenharGantt(ctx, execucoes) {
-  const cores = ["#2b4c7e", "#4c7e2b", "#7e2b4c", "#c47e1c"];
+function desenharGantt(context, execucoes) {
+  const paletaCores = ["#2b4c7e", "#4c7e2b", "#7e2b4c", "#c47e1c"];
   const alturaBarra = 30;
-  const margemY = 10;
-  const margemX = 60;
+  const espacoVertical = 10;
+  const margemEsquerda = 60;
 
-  // --- Ajusta automaticamente o tamanho do canvas ---
-  const tempoTotal = Math.max(...execucoes.map((p) => p.fim));
-  const larguraCanvas = Math.max(tempoTotal * 40 + 100, 900);
-  const alturaCanvas = (execucoes.length + 2) * (alturaBarra + margemY);
+  // --- Ajuste dinâmico do tamanho do canvas ---
+  const tempoMaximo = Math.max(...execucoes.map((paciente) => paciente.fim));
+  const larguraCanvas = Math.max(tempoMaximo * 40 + 100, 900);
+  const alturaCanvas = (execucoes.length + 2) * (alturaBarra + espacoVertical);
 
-  ctx.canvas.width = larguraCanvas;
-  ctx.canvas.height = alturaCanvas;
-  ctx.clearRect(0, 0, larguraCanvas, alturaCanvas);
+  context.canvas.width = larguraCanvas;
+  context.canvas.height = alturaCanvas;
+  context.clearRect(0, 0, larguraCanvas, alturaCanvas);
 
-  const eixoYBase = alturaCanvas - 40;
+  const baseY = alturaCanvas - 40;
 
-  // --- Eixo X ---
-  ctx.font = "12px Arial";
-  ctx.fillStyle = "#333";
-  for (let t = 0; t <= tempoTotal; t++) {
-    const x = margemX + t * 40;
-    ctx.fillText(t.toString(), x, eixoYBase + 20);
-    ctx.beginPath();
-    ctx.moveTo(x, eixoYBase);
-    ctx.lineTo(x, 20);
-    ctx.strokeStyle = "#eee";
-    ctx.stroke();
+  // --- Eixo do tempo ---
+  context.font = "12px Arial";
+  context.fillStyle = "#333";
+  for (let t = 0; t <= tempoMaximo; t++) {
+    const x = margemEsquerda + t * 40;
+    context.fillText(t.toString(), x, baseY + 20);
+    context.beginPath();
+    context.moveTo(x, baseY);
+    context.lineTo(x, 20);
+    context.strokeStyle = "#eee";
+    context.stroke();
   }
 
   // --- Desenho das barras ---
-  execucoes.forEach((p, i) => {
-    const y = eixoYBase - (i + 1) * (alturaBarra + margemY);
-    const cor = cores[(p.medico - 1) % cores.length];
+  execucoes.forEach((paciente, i) => {
+    const y = baseY - (i + 1) * (alturaBarra + espacoVertical);
+    const cor = paletaCores[(paciente.medico - 1) % paletaCores.length];
 
-    const xChegada = margemX + p.chegada * 40;
-    const xInicio = margemX + p.inicio * 40;
-    const xFim = margemX + p.fim * 40;
+    const xChegada = margemEsquerda + paciente.chegada * 40;
+    const xInicio = margemEsquerda + paciente.inicio * 40;
+    const xFim = margemEsquerda + paciente.fim * 40;
 
-    // Representa o tempo total da tarefa
-    ctx.strokeStyle = cor;
-    ctx.lineWidth = 2;
-    ctx.strokeRect(xChegada, y, xFim - xChegada, alturaBarra);
+    // Tempo total (contorno)
+    context.strokeStyle = cor;
+    context.lineWidth = 2;
+    context.strokeRect(xChegada, y, xFim - xChegada, alturaBarra);
 
-    //  Representa apenas o período de execução da tarefa
-    ctx.fillStyle = cor;
-    ctx.fillRect(xInicio, y, xFim - xInicio, alturaBarra);
+    // Tempo efetivo de execução (preenchido)
+    context.fillStyle = cor;
+    context.fillRect(xInicio, y, xFim - xInicio, alturaBarra);
 
-    // --- Nome e tempo do paciente ---
-    ctx.fillStyle = "#fff";
-    ctx.fillText(p.nome, xInicio + 5, y + 20);
+    // Informações de texto
+    context.fillStyle = "#fff";
+    context.fillText(paciente.nome, xInicio + 5, y + 20);
 
-    ctx.fillStyle = "#333";
-    ctx.fillText(`(${p.inicio}-${p.fim})`, xFim + 5, y + 20);
+    context.fillStyle = "#333";
+    context.fillText(`(${paciente.inicio}-${paciente.fim})`, xFim + 5, y + 20);
   });
 
-  // --- Linha base do tempo ---
-  ctx.beginPath();
-  ctx.moveTo(margemX, eixoYBase);
-  ctx.lineTo(larguraCanvas - 20, eixoYBase);
-  ctx.lineWidth = 2;
-  ctx.strokeStyle = "#333";
-  ctx.stroke();
+  // --- Linha base ---
+  context.beginPath();
+  context.moveTo(margemEsquerda, baseY);
+  context.lineTo(larguraCanvas - 20, baseY);
+  context.lineWidth = 2;
+  context.strokeStyle = "#333";
+  context.stroke();
 
-  // --- Título e legenda ---
-  ctx.fillStyle = "#000";
-  ctx.font = "bold 13px Arial";
-  ctx.fillText("Pacientes (base = primeiros atendidos)", 5, 20);
+  // --- Título ---
+  context.fillStyle = "#000";
+  context.font = "bold 13px Arial";
+  context.fillText("Pacientes (base = primeiros atendidos)", 5, 20);
 }
 
 // ===================================================================
 // REGISTRO DE EVENTOS
 // ===================================================================
-function registrarEvento(container, texto) {
-  const p = document.createElement("p");
-  p.textContent = texto;
-  container.appendChild(p);
+function registrarEvento(container, mensagem) {
+  const paragrafo = document.createElement("p");
+  paragrafo.textContent = mensagem;
+  container.appendChild(paragrafo);
   container.scrollTop = container.scrollHeight;
 }
