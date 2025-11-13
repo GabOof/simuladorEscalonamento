@@ -4,23 +4,38 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Simulador de Escalonamento</title>
+    <!-- Estilos gerais -->
     <link rel="stylesheet" href="style.css" />
   </head>
+
   <body>
     <h1>🏥 Hospital Digital</h1>
+
+    <!-- ==============================
+         SEÇÃO DE CONFIGURAÇÃO
+         Onde o usuário define os parâmetros da simulação
+    =============================== -->
     <section class="config">
+      <!-- Escolha do algoritmo -->
       <label for="algoritmo">Algoritmo:</label>
       <select id="algoritmo">
         <option value="sjf" selected>Shortest Job First (SJF)</option>
-        <!-- <option value="rr">Round Robin</option> <option value="srtf">SRTF</option> <option value="prioridade">Prioridade Não-Preemptivo</option> -->
+
+        <!-- <option value="rr">Round Robin</option>
+        <option value="srtf">SRTF</option>
+        <option value="prioridade">Prioridade Não-Preemptivo</option> -->
       </select>
+
+      <!-- Quantidade de médicos (recursos do sistema) -->
       <label for="medicos">Número de Médicos:</label>
       <select id="medicos">
         <option value="1">1</option>
         <option value="2">2</option>
         <option value="4">4</option>
       </select>
+
       <h3>Adicionar Pacientes</h3>
+      <!-- Entradas de dados do paciente -->
       <input type="text" id="nome" placeholder="Nome" />
       <input type="number" id="chegada" placeholder="Chegada" />
       <input type="number" id="duracao" placeholder="Duração do Atendimento" />
@@ -30,6 +45,8 @@
         placeholder="Prioridade (1 = Alta)"
       />
       <button id="addPaciente">Adicionar</button>
+
+      <!-- Tabela dinâmica de pacientes -->
       <table id="tabelaPacientes">
         <thead>
           <tr>
@@ -41,10 +58,19 @@
         </thead>
         <tbody></tbody>
       </table>
+
+      <!-- Botão principal da simulação -->
       <button id="simular">Simular</button>
     </section>
+
+    <!-- ==============================
+         SEÇÃO DE RESULTADOS
+         Exibe o gráfico, métricas e eventos
+    =============================== -->
     <section class="resultado">
       <h2>Resultado</h2>
+
+      <!-- Legenda para identificar as cores de cada médico -->
       <div class="legenda">
         <p><b>Legenda Médicos:</b></p>
         <div class="cores">
@@ -54,20 +80,32 @@
           <span class="cor medico4">Médico 4</span>
         </div>
       </div>
+
+      <!-- Canvas do gráfico de Gantt -->
       <div id="gantt" class="gantt-container">
         <canvas id="ganttCanvas" width="900" height="400"></canvas>
       </div>
+
+      <!-- Área de métricas -->
       <div id="metricas"></div>
+
+      <!-- Log de eventos -->
       <div id="eventos" class="logs"></div>
     </section>
+
+    <!-- ==============================
+         SCRIPTS PRINCIPAIS
+         main.js → interface e controle geral
+         sjf.js → lógica do algoritmo SJF
+    =============================== -->
     <script src="main.js"></script>
     <script src="algoritmos/sjf.js"></script>
+
     <!-- <script src="algoritmos/rr.js"></script> -->
     <!-- <script src="algoritmos/srtf.js"></script> -->
     <!-- <script src="algoritmos/prioridade.js"></script> -->
 
-    <!-- APENAS PARA TESTE APAGAR DEPOIS -->
+    <!-- Dados de teste automáticos (para demonstração) -->
     <script src="seed.js"></script>
-    <!-- ------------------------------- -->
   </body>
 </html>
