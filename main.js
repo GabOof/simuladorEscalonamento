@@ -38,13 +38,13 @@ function atualizarTabela() {
   tbody.innerHTML = "";
 
   // Cria uma linha de tabela para cada paciente
-  pacientes.forEach((p) => {
+  pacientes.forEach((paciente) => {
     const linha = `
       <tr>
-        <td>${p.nome}</td>
-        <td>${p.chegada}</td>
-        <td>${p.duracao}</td>
-        <td>${p.prioridade}</td>
+        <td>${paciente.nome}</td>
+        <td>${paciente.chegada}</td>
+        <td>${paciente.duracao}</td>
+        <td>${paciente.prioridade}</td>
       </tr>
     `;
     tbody.innerHTML += linha;
@@ -66,10 +66,10 @@ document.getElementById("simular").addEventListener("click", () => {
 
   // Escolhe qual algoritmo de escalonamento será utilizado
   if (algoritmo === "sjf") {
-    simularSJF([...pacientes], medicos);
+    executarSJF([...pacientes], medicos);
   }
 
-  // else if (algoritmo === "rr") simularRR([...pacientes], medicos);
-  // else if (algoritmo === "srtf") simularSRTF([...pacientes], medicos);
-  // else if (algoritmo === "prioridade") simularPrioridade([...pacientes], medicos);
+  // else if (algoritmo === "rr") executarRR([...pacientes], medicos);
+  // else if (algoritmo === "srtf") executarSRTF([...pacientes], medicos);
+  // else if (algoritmo === "prioridade") executarPrioridade([...pacientes], medicos);
 });
