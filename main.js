@@ -71,5 +71,5 @@ document.getElementById("simular").addEventListener("click", () => {
 
   // else if (algoritmo === "rr") executarRR([...pacientes], medicos);
   // else if (algoritmo === "srtf") executarSRTF([...pacientes], medicos);
-  // else if (algoritmo === "prioridade") executarPrioridade([...pacientes], medicos);
+  else if (algoritmo === "prioridade") executarPrioridade([...pacientes], medicos);
 });
