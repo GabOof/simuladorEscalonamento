@@ -70,7 +70,7 @@ document.getElementById("simular").addEventListener("click", () => {
   } else if (algoritmo === "srtf") {
     executeSRTF([...pacientes], medicos);
   }
+  else if (algoritmo === "prioridade") executarPrioridade([...pacientes], medicos);
 
   // else if (algoritmo === "rr") executarRR([...pacientes], medicos);
-  // else if (algoritmo === "prioridade") executarPrioridade([...pacientes], medicos);
 });

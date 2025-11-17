@@ -12,8 +12,11 @@
       rel="stylesheet"
       href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.0.1/css/all.min.css"
     />
-  </head>
 
+    <!-- Favicon emoji 🏥 -->
+    <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Ctext y='0.9em' font-size='90'%3E%F0%9F%8F%A5%3C/text%3E%3C/svg%3E">
+  </head>
+  
   <body>
     <h1>
       <i class="fa fa-hospital" style="color: #23501bff"></i> Hospital Digital
@@ -29,8 +32,8 @@
       <select id="algoritmo">
         <option value="sjf" selected>Shortest Job First (SJF)</option>
         <option value="srtf">Shortest Remaining Time First (SRTF)</option>
-        <!-- <option value="rr">Round Robin</option>
-        <option value="prioridade">Prioridade Não-Preemptivo</option> -->
+        <option value="prioridade">Prioridade (Não-Preemptivo)</option>
+        <!-- <option value="rr">Round Robin</option> -->
       </select>
 
       <!-- Quantidade de médicos (recursos do sistema) -->
@@ -119,10 +122,9 @@
     <script src="main.js"></script>
     <script src="algoritmos/sjf.js"></script>
     <script src="algoritmos/srtf.js"></script>
+    <script src="algoritmos/prioridade.js"></script>
 
     <!-- <script src="algoritmos/rr.js"></script> -->
-    <!-- <script src="algoritmos/prioridade.js"></script> -->
-
     <!-- Dados de teste automáticos (para demonstração) -->
     <script src="seed.js"></script>
   </body>
