@@ -40,10 +40,26 @@ button {
   color: #fff;
   cursor: pointer;
   border: none;
+  width: 34.85%;
 }
 
 button:hover {
   background-color: #23501bff;
+}
+
+/* Botão principal de simular */
+#simular {
+  background-color: #23501bff;
+  color: #fff;
+  cursor: pointer;
+  border: none;
+  display: block;
+  width: 100%;
+  margin-top: 15px;
+  font-size: 16px;
+  padding: 12px;
+  border-radius: 8px;
+  font-weight: bold;
 }
 
 /* ============================================================
@@ -118,6 +134,39 @@ button:hover {
 }
 .medico4 {
   background-color: #c47e1c;
+}
+
+/* ============================================================
+   MÉTRICAS OPERACIONAIS
+============================================================ */
+.metricas-card {
+  background: #f5f5f5;
+  border-radius: 10px;
+  padding: 15px;
+  border-left: 6px solid #23501bff;
+  margin-bottom: 15px;
+  font-size: 15px;
+}
+
+.metricas-titulo {
+  margin-top: 0;
+  color: #23501bff;
+  font-weight: bold;
+}
+
+.metricas-bloco {
+  margin-bottom: 15px;
+}
+
+.metricas-formula {
+  background: white;
+  padding: 10px;
+  border-radius: 8px;
+  border: 1px solid #ddd;
+  font-size: 14px;
+  overflow-x: auto;
+  white-space: pre;
+  font-family: "Courier New", monospace;
 }
 
 /* ============================================================
