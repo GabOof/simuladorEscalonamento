@@ -31,11 +31,9 @@
       <label for="algoritmo"><i class="fa fa-code" style="color: #23501bff"></i> Algoritmo:</label>
       <select id="algoritmo">
         <option value="sjf" selected>Shortest Job First (SJF)</option>
-
-        <!-- <option value="rr">Round Robin</option>
-        <option value="srtf">SRTF</option> -->
+        <option value="srtf">Shortest Remaining Time First (SRTF)</option>
         <option value="prioridade">Prioridade (Não-Preemptivo)</option>
-
+        <!-- <option value="rr">Round Robin</option> -->
       </select>
 
       <!-- Quantidade de médicos (recursos do sistema) -->
@@ -119,14 +117,14 @@
          SCRIPTS PRINCIPAIS
          main.js → interface e controle geral
          sjf.js → lógica do algoritmo SJF
+         srtf.js → lógica do algoritmo SRTF
     =============================== -->
     <script src="main.js"></script>
     <script src="algoritmos/sjf.js"></script>
-
-    <!-- <script src="algoritmos/rr.js"></script> -->
-    <!-- <script src="algoritmos/srtf.js"></script> -->
+    <script src="algoritmos/srtf.js"></script>
     <script src="algoritmos/prioridade.js"></script>
 
+    <!-- <script src="algoritmos/rr.js"></script> -->
     <!-- Dados de teste automáticos (para demonstração) -->
     <script src="seed.js"></script>
   </body>

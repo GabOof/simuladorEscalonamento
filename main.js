@@ -67,9 +67,10 @@ document.getElementById("simular").addEventListener("click", () => {
   // Escolhe qual algoritmo de escalonamento será utilizado
   if (algoritmo === "sjf") {
     executarSJF([...pacientes], medicos);
+  } else if (algoritmo === "srtf") {
+    executeSRTF([...pacientes], medicos);
   }
+  else if (algoritmo === "prioridade") executarPrioridade([...pacientes], medicos);
 
   // else if (algoritmo === "rr") executarRR([...pacientes], medicos);
-  // else if (algoritmo === "srtf") executarSRTF([...pacientes], medicos);
-  else if (algoritmo === "prioridade") executarPrioridade([...pacientes], medicos);
 });
