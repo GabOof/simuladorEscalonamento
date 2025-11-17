@@ -110,13 +110,36 @@ function executarSJF(listaPacientes, qtdMedicos) {
 
   // --- Exibe as métricas na interface ---
   painelMetricas.innerHTML = `
-    <p><b><i class="fa fa-hourglass-start" style="color: #23501bff"></i> Tempo Médio de Espera:</b> ${mediaEspera}</p>
-    <p><b><i class="fa fa-clock" style="color: #23501bff"></i> Tempo Médio de Execução (Turnaround):</b> ${mediaTurnaround}</p>
-    <p><b><i class="fa fa-exchange-alt" style="color: #23501bff"></i> Total de Trocas de Contexto:</b> ${
-      totalPacientes - qtdMedicos
-    }</p>
-    <p><b><i class="fa fa-user-md" style="color: #23501bff"></i> Utilização Média dos Médicos:</b> ${taxaUtilizacao}%</p>
-  `;
+  <div class="metricas-card">
+    <h3 class="metricas-titulo">Métricas Operacionais</h3>
+
+    <!-- Tempo Médio de Espera -->
+    <div class="metricas-bloco">
+      <p><b>Tempo Médio de Espera (Tw)</b></p>
+      <pre class="metricas-formula">Tw = Σ(tempo de espera) / N<br>Tw = ${somaEspera} / ${totalPacientes}<br><b>Tw = ${mediaEspera}</b></pre>
+    </div>
+
+    <!-- Turnaround -->
+    <div class="metricas-bloco">
+      <p><b>Tempo Médio de Turnaround (Tt)</b></p>
+      <pre class="metricas-formula">Tt = Σ(tempo total) / N<br>Tt = ${somaTurnaround} / ${totalPacientes}<br><b>Tt = ${mediaTurnaround}</b></pre>
+    </div>
+
+    <!-- Trocas de Contexto -->
+    <div class="metricas-bloco">
+      <p><b>Trocas de Contexto (Tc)</b></p>
+      <pre class="metricas-formula">Tc = N - número de médicos<br>Tc = ${totalPacientes} - ${qtdMedicos}<br><b>Tc = ${
+    totalPacientes - qtdMedicos
+  }</b></pre>
+    </div>
+
+    <!-- Utilização -->
+    <div class="metricas-bloco">
+      <p><b>Taxa Média de Utilização dos Médicos (U)</b></p>
+      <pre class="metricas-formula">U = (Σ tempo ocupado) / (tempo total × médicos) × 100<br>U = (${somaOcupacao}) / (${tempoCorrente} × ${qtdMedicos}) × 100<br><b>U = ${taxaUtilizacao}% </b></pre>
+    </div>
+  </div>
+`;
 
   registrarEvento(
     painelEventos,
