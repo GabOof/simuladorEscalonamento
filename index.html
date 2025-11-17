@@ -14,9 +14,12 @@
     />
 
     <!-- Favicon emoji 🏥 -->
-    <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Ctext y='0.9em' font-size='90'%3E%F0%9F%8F%A5%3C/text%3E%3C/svg%3E">
+    <link
+      rel="icon"
+      href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Ctext y='0.9em' font-size='90'%3E%F0%9F%8F%A5%3C/text%3E%3C/svg%3E"
+    />
   </head>
-  
+
   <body>
     <h1>
       <i class="fa fa-hospital" style="color: #23501bff"></i> Hospital Digital
@@ -28,7 +31,9 @@
     =============================== -->
     <section class="config">
       <!-- Escolha do algoritmo -->
-      <label for="algoritmo"><i class="fa fa-code" style="color: #23501bff"></i> Algoritmo:</label>
+      <label for="algoritmo"
+        ><i class="fa fa-code" style="color: #23501bff"></i> Algoritmo:</label
+      >
       <select id="algoritmo">
         <option value="sjf" selected>Shortest Job First (SJF)</option>
         <option value="srtf">Shortest Remaining Time First (SRTF)</option>
@@ -38,7 +43,8 @@
 
       <!-- Quantidade de médicos (recursos do sistema) -->
       <label for="medicos"
-        ><i class="fa-solid fa-user-doctor" style="color: #23501bff"></i> Número de Médicos:</label
+        ><i class="fa-solid fa-user-doctor" style="color: #23501bff"></i> Número
+        de Médicos:</label
       >
       <select id="medicos">
         <option value="1">1</option>
@@ -46,7 +52,10 @@
         <option value="4">4</option>
       </select>
 
-      <h3><i class="fa fa-user-plus" style="color: #23501bff"></i> Adicionar Pacientes</h3>
+      <h3>
+        <i class="fa fa-user-plus" style="color: #23501bff"></i> Adicionar
+        Pacientes
+      </h3>
       <!-- Entradas de dados do paciente -->
       <input type="text" id="nome" placeholder="Nome" />
       <input type="number" id="chegada" placeholder="Chegada" />
@@ -62,10 +71,19 @@
       <table id="tabelaPacientes">
         <thead>
           <tr>
-            <th><i class="fa fa-id-badge" style="color: #23501bff"></i> Nome</th>
-            <th><i class="fa fa-clock" style="color: #23501bff"></i> Chegada</th>
-            <th><i class="fa fa-hourglass-half" style="color: #23501bff"></i> Duração do Atendimento</th>
-            <th><i class="fa fa-flag" style="color: #23501bff"></i> Prioridade</th>
+            <th>
+              <i class="fa fa-id-badge" style="color: #23501bff"></i> Nome
+            </th>
+            <th>
+              <i class="fa fa-clock" style="color: #23501bff"></i> Chegada
+            </th>
+            <th>
+              <i class="fa fa-hourglass-half" style="color: #23501bff"></i>
+              Duração do Atendimento
+            </th>
+            <th>
+              <i class="fa fa-flag" style="color: #23501bff"></i> Prioridade
+            </th>
           </tr>
         </thead>
         <tbody></tbody>
@@ -80,7 +98,9 @@
          Exibe o gráfico, métricas e eventos
     =============================== -->
     <section class="resultado">
-      <h2><i class="fa fa-chart-bar" style="color: #23501bff"></i> Resultado</h2>
+      <h2>
+        <i class="fa fa-chart-bar" style="color: #23501bff"></i> Resultado
+      </h2>
 
       <!-- Legenda para identificar as cores de cada médico -->
       <div class="legenda">
