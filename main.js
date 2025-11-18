@@ -72,5 +72,11 @@ document.getElementById("simular").addEventListener("click", () => {
   }
   else if (algoritmo === "prioridade") executarPrioridade([...pacientes], medicos);
 
-  // else if (algoritmo === "rr") executarRR([...pacientes], medicos);
+  else if (algoritmo === "rr") executarRR([...pacientes], medicos);
+    const quantum = parseInt(document.getElementById("quantum").value);
+  if (isNaN(quantum) || quantum <= 0) {
+    alert("Informe um quantum válido para o algoritmo Round-Robin!");
+    return;
+  }
+  executeRR([...pacientes], medicos, quantum);
 });
