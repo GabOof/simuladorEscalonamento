@@ -38,7 +38,7 @@
         <option value="sjf" selected>Shortest Job First (SJF)</option>
         <option value="srtf">Shortest Remaining Time First (SRTF)</option>
         <option value="prioridade">Prioridade (Não-Preemptivo)</option>
-        <!-- <option value="rr">Round Robin</option> -->
+        <option value="rr">Round Robin</option>
       </select>
 
       <!-- Quantidade de médicos (recursos do sistema) -->
@@ -64,6 +64,14 @@
         type="number"
         id="prioridade"
         placeholder="Prioridade (1 = Alta)"
+      />
+      <input
+        type="number"
+        id="quantum"
+        placeholder="Quantum (RR)"
+        min="1"
+        disabled
+        style="cursor: not-allowed"
       />
       <button id="addPaciente"><i class="fa fa-check"></i> Adicionar</button>
 
@@ -140,7 +148,7 @@
     <script src="algoritmos/sjf.js"></script>
     <script src="algoritmos/srtf.js"></script>
     <script src="algoritmos/prioridade.js"></script>
-    <!-- <script src="algoritmos/rr.js"></script> -->
+    <script src="algoritmos/rr.js"></script>
 
     <!-- Dados de teste automáticos (para demonstração) -->
     <script src="seed.js"></script>
