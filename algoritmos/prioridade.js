@@ -63,7 +63,7 @@ function executarPrioridade(listaPacientes, qtdMedicos) {
       continue;
     }
 
-    // --- Ordena a fila pela prioridade (1 = maior prioridade). Em caso de empate, por chegada e depois por duração ---
+    // --- Ordena a fila pela prioridade (1 = maior prioridade).
     filaDeEspera.sort((a, b) => {
       if (a.prioridade !== b.prioridade) return a.prioridade - b.prioridade; // menor valor = mais prioridade
       if (a.chegada !== b.chegada) return a.chegada - b.chegada;
